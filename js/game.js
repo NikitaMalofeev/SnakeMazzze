@@ -7,6 +7,8 @@ const onload = () => {
     canvas.height = height;
 
     const renderGame = () => {
+        ctx.clearRect(0, 0, width, height);
+
         for (let y = 0; y < row; y += 1){
             for (let x = 0; x < row; x += 1){
                 // координаты игрового поля для отрисовки
