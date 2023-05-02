@@ -9,6 +9,8 @@ row = width / ceil;
 
 colors = {
     snakeHead: "#1fb9dd",
-    snakeBody: "#7FFFD4"
+    snakeBody: "#7FFFD4",
+    wall: "#425870",
+    apples: "#d86464"
 };
 

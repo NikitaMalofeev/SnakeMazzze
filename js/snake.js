@@ -1,12 +1,15 @@
 const changeDirection = (keyCode) => {
     const direction = mapKeyCode(keyCode);
+    // добавляю условие которое проверяет противоположное направеление и только после меняет дирекшн
+    if(_hasDirection(state.snake, direction)){
+        state.snake.direction = direction;
+    }
 
-    state.snake.direction = direction;
 }
 
 const moveSnake = () => {
     
-    //получение головы и направления из состояния
+    //получение головы и направления из состояния, странности при переносе на функцию getHead
     const headSnake = state.snake.tail[state.snake.tail.length - 1];
     const direction = state.snake.direction;
     let newMovementSnake;
@@ -59,4 +62,22 @@ const _setTeleportSnake = (snake, newHeadSnake) => {
     }
 
     return  { x: newHeadSnake.x, y: newHeadSnake.y, d: newHeadSnake.d, h: newHeadSnake.h }
+}
+
+const _hasDirection = (snake, direction) => {
+    const headSNake = snake.tail[snake.tail.length - 1];
+
+    if(
+        (direction === "left" && headSNake.d !== "right") ||
+        (direction === "up" && headSNake.d !== "down") ||
+        (direction === "right" && headSNake.d !== "left") ||
+        (direction === "down" && headSNake.d !== "up")
+    ){
+        return true;
+    }
+    return false;
+};
+    // функция для поиска головы змеи
+const _getHeadSnake = (snake) => {
+    return state.snake.tail[state.snake.tail.length - 1];
 }
