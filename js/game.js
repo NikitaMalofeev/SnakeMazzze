@@ -14,7 +14,7 @@ const onload = () => {
                 // координаты игрового поля для отрисовки
                 // ctx.fillStyle = "aqua";
                 // ctx.fillRect(x * ceil, y * ceil, ceil, ceil);
-                if(state.food.apples.x === x && state.food.apples.y === x){
+                if(state.food.apples.x === x && state.food.apples.y === y){
                     ctx.fillStyle = colors.apples;
                     ctx.fillRect(x * ceil, y * ceil, ceil, ceil);
                 };
@@ -27,6 +27,10 @@ const onload = () => {
                         if(sn.h){
                             ctx.fillStyle = colors.snakeHead;
                             ctx.fillRect(x * ceil, y * ceil, ceil, ceil);
+                            if(state.food.apples.x === x && state.food.apples.y === y){
+                                state.food.didAte = true;
+                                console.log("еда сьедена")
+                            }
                         }
                     }
                 });
@@ -66,7 +70,12 @@ const onload = () => {
             startTime = 0
             // Добавление движения для змеи со скоростью
             moveSnake();
-            addNewFood();
+            
+            if(state.food.didAte){
+                addNewFood(); 
+                
+            }
+            
             // после каждого нажатия перерисовывается игровое поле 
             renderGame();
         }

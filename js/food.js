@@ -1,5 +1,5 @@
 const addNewFood = () => {
-    const cordsNewFood = _getRandomCords(row);
+    const cordsNewFood = getFreeSpace();
     console.log(cordsNewFood)
     console.log('test')
 
@@ -27,7 +27,7 @@ const getFreeSpace = () => {
         x, y;
 
     if(!didAte){
-        return false
+        return false;
     }
 
     //генерация новых координат на основе row 
@@ -56,7 +56,9 @@ const getFreeSpace = () => {
         if(isNewCordsFood){
             continue;
         }
+        
     }
-    console.log("проверка работы")
-    return { x, y }
+    console.log(isNewCordsFood)
+    
+    
 }

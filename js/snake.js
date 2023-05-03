@@ -42,6 +42,8 @@ const moveSnake = () => {
     headSnake.h = false;
     // даем новое значение голове
     state.snake.tail.push(newMovementSnake);
+
+    _checkGrowth();
 }
 
 const _setTeleportSnake = (snake, newHeadSnake) => {
@@ -77,6 +79,15 @@ const _hasDirection = (snake, direction) => {
     }
     return false;
 };
+
+const _checkGrowth = () => {
+    const {snake, food: {apples}} = state;
+    const headSNake = snake.tail[snake.tail.length - 1];
+
+    if(apples.x === headSNake.x, apples.y === headSNake.y){
+        state.food.didAte = true;
+    }
+}
     // функция для поиска головы змеи
 const _getHeadSnake = (snake) => {
     return state.snake.tail[state.snake.tail.length - 1];

@@ -11,7 +11,7 @@ const state = {
     //указываем координаты и сопоставляем в рендер гейм для еды 
     food: {
         //сьедена еда или нет
-        didAte: true,
+        didAte: false,
         apples: { x: 5, y: 5 }
     },
     level: 1,
