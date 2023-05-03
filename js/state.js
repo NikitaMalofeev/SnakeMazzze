@@ -6,7 +6,9 @@ const state = {
             { x: 3, y: 1, d: "right", h: false},
             { x: 4, y: 1, d: "right", h: true}
         ],
-        direction: "right"
+        direction: "right",
+        lastPosTail: {},
+        speed: 300
     },
     //указываем координаты и сопоставляем в рендер гейм для еды 
     food: {

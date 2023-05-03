@@ -4,9 +4,10 @@ const addNewFood = () => {
     console.log('test')
 
     if(cordsNewFood){
-        state.food.didAte = false;
+        
         state.food.apples.x = cordsNewFood.x;
         state.food.apples.y = cordsNewFood.y;
+        state.food.didAte = false;
     }
 }
 
@@ -59,6 +60,5 @@ const getFreeSpace = () => {
         
     }
     console.log(isNewCordsFood)
-    
-    
+    return { x, y }    
 }

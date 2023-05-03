@@ -29,6 +29,9 @@ const onload = () => {
                             ctx.fillRect(x * ceil, y * ceil, ceil, ceil);
                             if(state.food.apples.x === x && state.food.apples.y === y){
                                 state.food.didAte = true;
+                                //добавляем в последгний элемент массива новый хвост змеи
+                                state.snake.tail.unshift(state.snake.lastPosTail)
+                                state.snake.speed = state.snake.speed - 0.5;
                                 console.log("еда сьедена")
                             }
                         }
@@ -64,7 +67,7 @@ const onload = () => {
         currentTime = new Date().getTime()
         time = currentTime - startTime;
         //время с которым двигается змейка
-        currendSecond = Math.floor(time / 200)
+        currendSecond = Math.floor(time / state.snake.speed)
 
         if(currendSecond > 0) {
             startTime = 0
@@ -73,11 +76,13 @@ const onload = () => {
             
             if(state.food.didAte){
                 addNewFood(); 
+                console.log("новая еда добавлена")
                 
             }
             
             // после каждого нажатия перерисовывается игровое поле 
             renderGame();
+            
         }
     })
     

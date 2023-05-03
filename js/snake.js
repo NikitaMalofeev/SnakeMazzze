@@ -36,14 +36,19 @@ const moveSnake = () => {
 
     newMovementSnake = _setTeleportSnake(state.snake, newMovementSnake);
 
+    if(_getCollisionSnake(newMovementSnake)){
+        return true;
+        //добавить pop up Для проигрыша
+    }
+
 
     // удаляем голову( первый элемент массива)
-    state.snake.tail.shift();
+    state.snake.lastPosTail = state.snake.tail.shift();
     headSnake.h = false;
     // даем новое значение голове
     state.snake.tail.push(newMovementSnake);
 
-    _checkGrowth();
+    
 }
 
 const _setTeleportSnake = (snake, newHeadSnake) => {
@@ -80,14 +85,37 @@ const _hasDirection = (snake, direction) => {
     return false;
 };
 
-const _checkGrowth = () => {
-    const {snake, food: {apples}} = state;
-    const headSNake = snake.tail[snake.tail.length - 1];
+// почему-то не получилось использовать следующую функцию вместо кода в renderGame
+// const _checkGrowth = () => {
+//     const {snake, food: {apples}} = state;
+//     const headSNake = snake.tail[snake.tail.length - 1];
 
-    if(apples.x === headSNake.x, apples.y === headSNake.y){
-        state.food.didAte = true;
+//     if(apples.x === headSNake.x, apples.y === headSNake.y){
+//         state.food.didAte = true;
+//         state.snake.tail.unshift(state.snake.lastPosTail)
+//         state.snake.speed = state.snake.speed - 50;
+//     }
+// }
+
+const _getCollisionSnake = (headSnake) => {
+    const { snake, maps, level } = state;
+    const { tail } = snake;
+    const map = maps[`map${level}`];
+
+    for(let t = 0; t < tail.length; t += 1){
+        if(headSnake.x === tail[t].x && headSnake.y === tail[t].y){
+            return true
+        }
     }
+    for(let m = 0; m < map.cords.length; m += 1){
+        if(headSnake.x === map.cords[m].x && headSnake.y === map.cords[m].y){
+            return true;
+        }
+    }
+
 }
+
+
     // функция для поиска головы змеи
 const _getHeadSnake = (snake) => {
     return state.snake.tail[state.snake.tail.length - 1];
