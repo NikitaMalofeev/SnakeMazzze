@@ -22,7 +22,12 @@ const state = {
         "map2": map2,
         "map1": map1,
         "map1": map1
-    }
+    },
+    score: 0,
+    nextLevel: false,
+    win: false,
+    gameStart: false,
+    gameOver: false
 }
 
 

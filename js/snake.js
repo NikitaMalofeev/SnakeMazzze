@@ -37,6 +37,11 @@ const moveSnake = () => {
     newMovementSnake = _setTeleportSnake(state.snake, newMovementSnake);
 
     if(_getCollisionSnake(newMovementSnake)){
+        state.gameStart = false;
+        state.nextLevel = false; 
+        state.win = false;
+
+        state.gameOver = true
         return true;
         //добавить pop up Для проигрыша
     }
@@ -94,6 +99,7 @@ const _hasDirection = (snake, direction) => {
 //         state.food.didAte = true;
 //         state.snake.tail.unshift(state.snake.lastPosTail)
 //         state.snake.speed = state.snake.speed - 50;
+//         state.score += 1;
 //     }
 // }
 
@@ -104,6 +110,11 @@ const _getCollisionSnake = (headSnake) => {
 
     for(let t = 0; t < tail.length; t += 1){
         if(headSnake.x === tail[t].x && headSnake.y === tail[t].y){
+            state.gameStart = false;
+            state.nextLevel = false;
+            state.win = false;
+
+            state.gameOver = true;
             return true
         }
     }
@@ -119,4 +130,58 @@ const _getCollisionSnake = (headSnake) => {
     // функция для поиска головы змеи
 const _getHeadSnake = (snake) => {
     return state.snake.tail[state.snake.tail.length - 1];
+}
+
+const checkNextLevel = () => {
+    const { score, maps, level } = state;
+    const map = maps[`map${level}`];
+
+    if(score >= map.completed && level < amountLevels){
+        state.snake = {
+            tail: [
+                { x: 1, y: 1, d: "right", h: false},
+                { x: 2, y: 1, d: "right", h: false},
+                { x: 3, y: 1, d: "right", h: false},
+                { x: 4, y: 1, d: "right", h: true}
+            ],
+            direction: "right",
+            lastPosTail: {},
+            speed: 300
+        };
+
+        //описываем все что должно произойти при map.completed
+
+        state.food = {
+            didAte: false,
+            apples: { x: 5, y: 5 }
+        }
+
+        state.score = 0;
+        state.gameStart = false;
+        state.win = false;
+        state.gameOver = false;
+
+        state.nextLevel = true;
+
+        state.level += 1;
+
+        return true
+    }
+}
+
+const checkWin = () => {
+    const { score, maps, level } = state;
+    const map = maps[`map${level}`];
+    console.log(map);
+
+    if(score >= map.completed && level >= amountLevels){
+        state.gameStart = false,
+        state.gameOver = false,
+        state.nextLevel = false,
+
+        state.win = true;
+
+        return true
+    }
+
 }

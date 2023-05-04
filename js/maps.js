@@ -1,22 +1,22 @@
 // в cords хрянятся препятствия, completed количество очков для прохождения
 const map1 ={
     cords: [],
-    completed: 394
+    completed: 60
 };
 
 const map2 ={
     cords: [],
-    completed: 394
+    completed: 130
 };
 
 const map3 ={
     cords: [],
-    completed: 394
+    completed: 400
 };
 
 const map4 ={
     cords: [],
-    completed: 394
+    completed: 200
 };
 
 // отрисовываем карту принимая карту, начальную координату, начальное и конечное число
@@ -59,6 +59,7 @@ generateMap(map2, "x", 15, 18, 2);
 generateMap(map2, "x", 15, 18, 3);
 generateMap(map2, "x", 15, 18, 4);
 
+//почему-то не работает фаил, 42 строчка game.js cords не находит
 generateMap(map3, "x", 0, 20, 0);
 generateMap(map3, "y", 2, 18, 19);
 generateMap(map3, "x", 0, 20, 19);
@@ -73,9 +74,9 @@ generateMap(map3, "y", 7, 13, 4);
 generateMap(map3, "y", 7, 13, 3);
 generateMap(map3, "x", 7, 13, 7);
 generateMap(map3, "x", 7, 13, 8);
+generateMap(map3, "x", 7, 13, 12);
 generateMap(map3, "x", 7, 13, 9);
 generateMap(map3, "x", 7, 13, 10);
 generateMap(map3, "x", 7, 13, 11);
-generateMap(map3, "x", 7, 13, 12);
 
 
